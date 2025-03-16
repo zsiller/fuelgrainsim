@@ -1,0 +1,66 @@
+[project]
+name = "fuelgrainsim"
+dynamic = ["version"]
+dependencies = [
+    "pandas",
+    "matplotlib",
+    "argparse",
+    "shapely",
+    "svgpathtools",
+]
+requires-python = ">=3.9"
+description = "Tool to track spindle pole movements in fluorescently labeled mitotic cells."
+readme = "README.md"
+authors = [{ name = "Zachary Siller" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+
+[project.scripts]
+fuelgrainsim = "fuelgrainsim.thrust_simulation:main"
+
+[project.gui-scripts]
+fuelgrainsim = "fuelgrainsim.thrust_simulation:main"
+
+[project.urls]
+Homepage = "https://github.com/zsiller/fuelgrainsim"
+Issues = "https://github.com/zsiller/fuelgrainsim/issues"
+
+[build-system]
+requires = [
+    "hatchling < 1.19.0",
+    "versioningit",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "versioningit"
+
+[tool.versioningit.vcs]
+match = ["[0-9]*.[0-9]*.[0-9]*", "[0-9]*.[0-9]*.[0-9]*.dev[0-9]*"]
+default-tag = "0.0.0"
+
+[tool.versioningit.next-version]
+method = "smallest-release"
+
+[tool.versioningit.write]
+method = { module = "write_version_info", value = "write_version_info"}
+path = "src/fuelgrainsim/_version.py"
+
+[tool.versioningit.format]
+distance = "{base_version}.post{distance}+{vcs}{rev}"
+dirty = "{base_version}+d{build_date:%Y%m%d}"
+distance-dirty = "{base_version}.post{distance}+{vcs}{rev}.d{build_date:%Y%m%d}"
+
+[tool.hatch.build]
+# Replace the path below with the path to the file created by the
+# `write` step:
+artifacts = ["src/fuelgrainsim/_version.py"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src/fuelgrainsim", "/README.md", "/LICENSE", "/pyproject.toml"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
