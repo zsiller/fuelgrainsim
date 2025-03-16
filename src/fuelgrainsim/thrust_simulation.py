@@ -3,7 +3,7 @@ Main file
 Performs thrust curve calculations and plotting
 """
 
-from thrust_curve_class import Shape, Plot, SVG
+from .thrust_curve_class import Shape, Plot, SVG
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -151,13 +151,22 @@ def file_args():
         tuple: A tuple containing the input folder path and the output folder path as strings.
     """
     parser = argparse.ArgumentParser(description='Import folder and export folder')
-    parser.add_argument('-i', '--input-folder', type=str, help='Provide a folder containing DXF files', required=True)
-    parser.add_argument('-o', '--output-folder', type=str, help='Provide a folder for simulation results', required=True)
-    parser.add_argument('-v', '--variables', type=str, help='Provide variables', required=True)
-    parser.add_argument('-l', '--log-level', type=str, help="Enter logging level to be displayed", default="ERROR")
+    parser.add_argument('-i', '--input', type=str, help='Provide a folder containing DXF files', required=True)
+    parser.add_argument('-o', '--output', type=str, help='Provide a folder for simulation results', required=True)
+    parser.add_argument('-l', '--log_level', type=str, help="Enter logging level to be displayed", default="ERROR")
+    parser.add_argument('--isp', type=float, help='Initial specific impulse', required=True)
+    parser.add_argument('--a', type=float, help='Enter regression coefficient a', required=True)
+    parser.add_argument('--nn', type=float, help='Enter regression coefficient nn', required=True)
+    parser.add_argument('--density', type=float, help="Enter material density", required = True)
+    parser.add_argument('--flow', type=float, help='Oxidiser flow rate', required=True)
+    parser.add_argument('--length', type=float, help='Fuel grain length', required=True)
+    parser.add_argument('--iterations', type=float, help='Number of iteration', required=True)
+    parser.add_argument('--time', type=float, help="Fire time", required=True)
+
     args = parser.parse_args()
     logging.info(f"Input folder: {args.input_folder}, Output folder: {args.output_folder}")
-    return args.input_folder, args.output_folder, args.log_level, args.variables
+    arg_list = [args.input, args.output, args.log_level, args.isp, args.a, args.nn, args.density, args.flow, args.length, args.iterations, args.time]
+    return arg_list
 
 
 def curve_sim(shape,variables):
@@ -328,7 +337,7 @@ def run(each,folder,variables):
     logging.info(f"Processed {each.name}")
 
 
-def run_simulation(input_folder: str, output_folder: str, variables: str, log_level: str = "ERROR"):
+def run_simulation(input_folder: str, output_folder: str, isp: str, a: str, nn: str, density: str, flow: str, length: str, iterations: str, time: str, log_level: str = "ERROR"):
     """
     Runs the thrust curve simulation programmatically.
 
@@ -355,7 +364,7 @@ def run_simulation(input_folder: str, output_folder: str, variables: str, log_le
     )
 
     files = list(dxf.glob("*.dxf"))
-    variable_list = [float(x) for x in variables.split(',')]
+    variable_list = [float(isp),float(a),float(nn),float(density),float(flow),float(length),float(iterations),float(time)]
 
     with mp.Pool(processes=4) as pool:
         pool.starmap(run, [(each, folder, variable_list) for each in files])
@@ -364,11 +373,9 @@ def run_simulation(input_folder: str, output_folder: str, variables: str, log_le
     print("Simulation DONE")
     return True
 
-def main():
-    dxf, svg, level, variables = file_args()
-    run_simulation(dxf, svg, variables, level)
 
 if __name__ == "__main__":
-    main()
+    args = file_args()
+    run_simulation(args[0], args[1], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10])
 
 
