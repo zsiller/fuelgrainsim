@@ -1,4 +1,4 @@
-# fuel-grain-simulator
+# fuelgrainsim
 
 [![License BSD-3](https://img.shields.io/github/license/zsiller/fuelgrainsim?label=license&style=flat)](https://github.com/zsiller/fuelgrainsim/blob/main/LICENSE)
 
