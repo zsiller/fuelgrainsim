@@ -13,6 +13,7 @@ from pathlib import Path
 import argparse
 import shutil
 import multiprocessing as mp
+import platform
 import os
 import logging
 
@@ -25,8 +26,6 @@ class Config:
     g = 9.8 #Gravitational constant
     m_fu_adj = 1.2 * m_fu  #Required fuel grain mass with 20 percent margin
     t_0 = 0
-
-import logging
 
 def get_area(polygon):
     """
@@ -127,9 +126,12 @@ def dxf_to_svg(dxf: str,svg: str):
     svg_path = Path(svg)
     logging.info(f"Converting {dxf_path} to {svg_path}")
 
-    if dxf_path.exists():
+    if dxf_path.exists() and platform.system() == "Windows":
         cmd = ["start","inkscape",str(dxf_path),"--export-type=svg","--export-filename="+str(svg_path)]
         subprocess.Popen(cmd,shell=True)
+    elif dxf_path.exists() and (platform.system() == "Darwin" or platform.system() == "Linux"):
+        cmd = ["inkscape", str(dxf_path), "--export-type=svg", "--export-filename=" + str(svg_path)]
+        subprocess.Popen(cmd, shell=True)
     else:
         logging.error(f"DXF file not found: {dxf}")
         raise FileNotFoundError("File not found")
