@@ -13,7 +13,7 @@ def write_version_info(
     """
     Write the build info to the project directory.
     """
-    path = Path(project_dir) / params.get("path", "src/mitosisanalyzer/_version.py")
+    path = Path(project_dir) / params.get("path", "src/fuelgrainsim/_version.py")
 
     try:
         git_hash = check_output(["git", "rev-parse", "HEAD"]).decode().strip()

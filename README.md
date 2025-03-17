@@ -1,6 +1,6 @@
 # fuel-grain-simulator
 
-[![License BSD-3](https://img.shields.io/github/license/zhsiller/fuelgrainsim?label=license&style=flat)](https://github.com/zsiller/fuelgrainsim/blob/main/LICENSE)
+[![License BSD-3](https://img.shields.io/github/license/zsiller/fuelgrainsim?label=license&style=flat)](https://github.com/zsiller/fuelgrainsim/blob/main/LICENSE)
 
 ## Installation 
 
@@ -16,9 +16,9 @@ Before application is run be sure to download Inkscape for conversion between DX
 
 [Latest version](https://inkscape.org/release/inkscape-1.4/)
 
-In command line run
+To aid in understanding how the program works and expected results a test DXF file and expected results has been provided.
 ```
-thrust_simulation -i imagestack.nd2 -o my_outputdir -s 1 -d 2 -r 1
+fuelgrainsim --input DXF_path --output your_path --isp 237.4 --a .0004 --nn .37 --density 975 --flow 1.279 --length .3302 --iterations 10 --time 5.619
 ```
 
 **Command line arguements:**
@@ -40,12 +40,7 @@ thrust_simulation -i imagestack.nd2 -o my_outputdir -s 1 -d 2 -r 1
   --time TIME           Fire time
 ```
 
-## Testing
-To aid in understanding how the program works and expected results a test DXF file and expected results has been provided.
-```
-thrust_simulation --input DXF_path --output your_path --isp 237.4 --a .0004 --nn .37 --density 975 --flow 1.279 --length .3302 --iterations 10 --time 5.619
-```
-**Tips**
+## Tips
 - Iterations is iterations per second not total iterations (try to keep total iterations under 100)
 - Make sure your DXF file has a 10 mm scale bar to scale the DXF file to scale created SVG to proper size
 - The last subdirectory on the output path is the folder output files will be put in (it does not need to exist yet, it will be created if it doesn't)
