@@ -165,7 +165,7 @@ def file_args():
 
     args = parser.parse_args()
     logging.info(f"Input folder: {args.input}, Output folder: {args.output}")
-    arg_list = [args.input, args.output, args.log_level, args.isp, args.a, args.nn, args.density, args.flow, args.length, args.iterations, args.time]
+    arg_list = [args.input, args.output, args.isp, args.a, args.nn, args.density, args.flow, args.length, args.iterations, args.time, args.log_level]
     return arg_list
 
 
@@ -376,7 +376,7 @@ def run_simulation(input_folder: str, output_folder: str, isp: str, a: str, nn: 
 
 def main():
     args = file_args()
-    run_simulation(args[0], args[1], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10])
+    run_simulation(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10])
 
 if __name__ == "__main__":
     main()
