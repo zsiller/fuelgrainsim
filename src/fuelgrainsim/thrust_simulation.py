@@ -164,7 +164,7 @@ def file_args():
     parser.add_argument('--time', type=float, help="Fire time", required=True)
 
     args = parser.parse_args()
-    logging.info(f"Input folder: {args.input_folder}, Output folder: {args.output_folder}")
+    logging.info(f"Input folder: {args.input}, Output folder: {args.output}")
     arg_list = [args.input, args.output, args.log_level, args.isp, args.a, args.nn, args.density, args.flow, args.length, args.iterations, args.time]
     return arg_list
 
