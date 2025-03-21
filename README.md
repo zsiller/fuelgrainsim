@@ -14,9 +14,9 @@ fuelgrainsim is a tool for analyzing and creating regression rate and thrust cur
 ## Running fuelgrainsim
 Before application is run be sure to download Inkscape for conversion between DXF and SVG file.
 
-[Latest version](https://inkscape.org/release/inkscape-1.4/)
+[Inkscape Download](https://inkscape.org/release/inkscape-1.4/)
 
-To aid in understanding how the program works and expected results a test DXF file and expected results has been provided.
+To aid in understanding how the program works and expected results a test DXF file and expected results has been provided in the test_files folder.
 ```
 fuelgrainsim --input DXF_path --output your_path --isp 237.4 --a .0004 --nn .37 --density 975 --flow 1.279 --length .3302 --iterations 10 --time 5.619
 ```
@@ -44,6 +44,18 @@ fuelgrainsim --input DXF_path --output your_path --isp 237.4 --a .0004 --nn .37 
 - Iterations is iterations per second not total iterations (try to keep total iterations under 100)
 - Make sure your DXF file has a 10 mm scale bar to scale the DXF file to scale created SVG to proper size
 - The last subdirectory on the output path is the folder output files will be put in (it does not need to exist yet, it will be created if it doesn't)
+
+## Outputs
+**By default, the program will create:**
+
+- Gif displaying the fuel grain front regressing, corresponding regression rate, and thrust.
+- CSV file with sim results that charts are created from.
+
+    - Thrust
+    - Regression rate
+    - Change in cross-sectional area
+    - Perimeter of grain cutout
+- Plot of regression rate and trust over fire time.
 
 ## License
 
