@@ -1,13 +1,8 @@
 """
 Contains class definitions for SVG, Shape, and Plot
-
-Required libraries
-Shapely: https://shapely.readthedocs.io/en/stable/#
-svgpathtools: https://github.com/mathandy/svgpathtools
 """
 
 import matplotlib as mpl
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from matplotlib.ticker import MultipleLocator, AutoMinorLocator
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -19,7 +14,7 @@ import math
 
 import shapely as sg
 import shapely.affinity as sa
-from shapely import get_geometry, symmetric_difference, remove_repeated_points, get_coordinates, Polygon, \
+from shapely import get_geometry, symmetric_difference, remove_repeated_points, get_coordinates, \
     get_exterior_ring, centroid, get_x, get_y
 
 
@@ -119,7 +114,7 @@ class Shape:
 
     def _linear_approximation(self, path2, steps_unit=5):
         """
-        Takes path and approximates arc segments into line segments for computation
+        Takes path and approximates arc segments into line segments for faster computation
 
         Parameters
             path2: path object to perform approximation on
